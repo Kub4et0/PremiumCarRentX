@@ -1,63 +1,94 @@
+I. PremiumCarRentX - Car Rental Management System
+PremiumCarRentX is a high-end web platform designed to streamline car rental operations. 
+It provides a comprehensive solution for fleet management, personal driver services, 
+and customer reservations, blending advanced functionality with a premium 
+"Glassmorphism" visual design.
 
 
 
+II. Key Features
+Centralized Administration: Full CRUD operations for managing vehicles, 
+professional drivers, and bookings.
 
-!!!Преди да стартирате приложението трябва да изпълните командата Update-Database в Package Manager Console в програмата VisualStudio
+Real-time Automation: Intelligent calculation of rental costs based on duration and 
+additional services (e.g., personal driver).
 
+Premium UI/UX: Responsive interface featuring modern Glassmorphism effects, 
+optimized for all devices.
 
+Role-Based Access Control (RBAC): Secure authentication and authorization using 
+ASP.NET Core Identity with predefined roles: Admin, Client, and Driver.
 
-
-
-PremiumCarRentX - Дипломен ПроектPremiumCarRentX е иновативна уеб платформа, проектирана да отговори на 
-нуждите на съвременния бизнес за отдаване на автомобили под наем. Приложението предлага цялостно решение за 
-управление на автопарк, лични шофьори и клиентски резервации, съчетавайки висока функционалност с луксозен 
-визуален дизайн.
-
-Основни функционалностиЦентрализирано управление: Пълна администрация на автомобили, шофьори и резервации 
-от едно място.Автоматизация: Интелигентно изчисляване на крайната цена за наем в реално време, базирано на 
-периода и допълнителните услуги (личен шофьор).Premium Дизайн: Модерен потребителски интерфейс, използващ 
-Glassmorphism ефекти и адаптивен дизайн за всички видове устройства.Сигурност и Роли: Интегрирана система за
-оторизация (ASP.NET Core Identity) с дефинирани роли: Admin, Client и Driver.Динамичен каталог: Търсене и 
-филтриране на автомобили по клас, цена, марка и тип трансмисия.
-
-Технологичен стек
-Проектът е изграден чрез съвременни front-end и back-end технологии:
-
-Компонент					Технология
-Framework					ASP.NET Core MVC 
-Език за програмиране		C# 
-База данни					SQL Server 
-ORM							Entity Framework Core 
-Frontend					"HTML5, CSS3 (Custom Glassmorphism), JavaScript "
-Инструменти					"SSMS, Visual Studio 2022 "
+Advanced Filtering: Dynamic catalog allowing users to filter cars by class, price, 
+brand, and transmission type.
 
 
-АрхитектураПриложението следва архитектурния модел MVC (Model-View-Controller):Model:
-Управлява данните и бизнес логиката (автомобили, наеми, потребители).
-View: Визуализира интерфейса чрез Razor страници.
-Controller: Координира заявките между потребителя и базата данни.
 
-И нсталация и стартиране
-1. Клонирайте хранилището:
-git clone https://github.com/your-username/PremiumCarRentX.git
-2.Конфигурирайте базата данни:
-Променете Connection String-а в appsettings.json, за да сочи към вашия локален SQL Server.
-3.Приложете миграциите:
-Изпълнете следната команда в Package Manager Console, за да създадете таблиците:
-dotnet ef database update
-4.Стартирайте проекта:
-При първо стартиране класът DbSeeder автоматично ще създаде системните роли и администраторски акаунт.
-Admin Email: admin@rentacar.com
+III. Technical Stack
+
+Component					Technology
+Framework					ASP.NET Core 9.0 MVC
+Language					C#
+Database					MS SQL Server
+ORM							Entity Framework Core
+Frontend					"HTML5, CSS3 (Custom Glassmorphism), JavaScript, Bootstrap"
+Mapping & Security			"AutoMapper, ASP.NET Core Identity"
+Testing						"NUnit, Moq"
+
+
+
+IV. Architecture
+The application follows the MVC (Model-View-Controller) architectural pattern to 
+ensure separation of concerns:
+
+Model: Handles data logic and business rules (Vehicles, Rentals, Users).
+
+View: Renders the UI using Razor Pages.
+
+Controller: Orchestrates user requests, processes logic, 
+and communicates with the database.
+
+System Logic & Use Cases
+To visualize the interaction between the different user roles and the system's core 
+features, please refer to the Use Case Diagram below:
+!![Use Case Diagram](use-case.jpg)
+*(Note: Diagram is in Bulgarian as part of the original diploma documentation)*
+
+
+V. Testing
+The project includes a robust suite of Unit Tests developed with NUnit and Moq,
+ensuring system stability:
+
+Controller Logic: Testing Admin, Cars, Rentals, and Home controllers.
+
+Business Logic: Validation of price calculations and date-range overlaps
+for reservations.
+
+Mocking: Simulated dependencies for UserManager and database contexts to 
+ensure isolated testing.
+
+
+
+VI. Installation & Setup
+1. Clone the repository:
+git clone https://github.com/Kub4et0/PremiumCarRentX.git
+
+2. Database Configuration:
+Update the ConnectionStrings in appsettings.json to point to your local SQL Server
+instance.
+
+3. Apply Migrations:
+Run the following command in the Package Manager Console:
+Update-Database
+
+4. Seeding Data:
+On the first run, the DbSeeder class automatically creates roles and a default
+Admin account:
+Email: admin@rentacar.com
 Password: Admin123!
 
-ТестванеПроектът включва набор от компонентни тестове (Unit Tests), 
-реализирани с NUnit и Moq, които покриват:
-Логиката на контролерите (Admin, Cars, Rentals, Home).
-Коректността на изчисленията в базата данни.
-Валидацията на резервациите и застъпването на дати.
 
- Автор
- Дипломант: Александър Димитров 
- Ръководител: Тихомира Тенчева 
- Училище: ПМГ „Иван Вазов“ – Димитровград 
- Година: 2026 
+
+VII. Author
+Aleksandar Dimitrov Graduation Project 2026 School: PMG "Ivan Vazov" – Dimitrovgrad
+Major: Applied Programmer
