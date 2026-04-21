@@ -49,7 +49,8 @@ Controller: Orchestrates user requests, processes logic,
 and communicates with the database.
 
 System Logic & Use Cases
-To visualize the interaction between the different user roles and the system's core features, please refer to the Use Case Diagram below:
+To visualize the interaction between the different user roles and the system's 
+core features, please refer to the Use Case Diagram below:
 
 ![Use Case Diagram](use-case.jpg)
 
@@ -94,3 +95,6 @@ Password: Admin123!
 VII. Author
 Aleksandar Dimitrov Graduation Project 2026 School: PMG "Ivan Vazov" – Dimitrovgrad
 Major: Applied Programmer
+For a more detailed overview of the project, including database schemas, logic flows,
+	I and technical specifications, you can view the full documentation here:
+[View Full Documentation (PDF)](./Documentation/Александър-Димитров-Документация-MVC.pdf)
