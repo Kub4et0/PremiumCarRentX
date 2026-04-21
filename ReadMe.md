@@ -49,10 +49,12 @@ Controller: Orchestrates user requests, processes logic,
 and communicates with the database.
 
 System Logic & Use Cases
-To visualize the interaction between the different user roles and the system's core 
-features, please refer to the Use Case Diagram below:
-!![Use Case Diagram](use-case.jpg)
+To visualize the interaction between the different user roles and the system's core features, please refer to the Use Case Diagram below:
+
+![Use Case Diagram](use-case.jpg)
+
 *(Note: Diagram is in Bulgarian as part of the original diploma documentation)*
+
 
 
 V. Testing
