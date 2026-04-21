@@ -1,0 +1,28 @@
+﻿@model Rent_a_car.Models.Car
+
+@{
+    ViewData["Title"] = "Изтриване на автомобил";
+}
+
+<h1>Изтриване на автомобил</h1>
+
+<div class="alert alert-warning">
+    Сигурен ли си, че искаш да изтриеш този автомобил?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Марка</dt>
+    <dd class="col-sm-9">@Model.Brand</dd>
+
+    <dt class="col-sm-3">Модел</dt>
+    <dd class="col-sm-9">@Model.Model</dd>
+
+    <dt class="col-sm-3">Година</dt>
+    <dd class="col-sm-9">@Model.Year</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Изтрий</button>
+    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+</form>

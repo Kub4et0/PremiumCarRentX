@@ -1,0 +1,68 @@
+﻿@page "/Identity/Account/Register"
+@model Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="padding-top: 150px; padding-bottom: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="glass-card p-5 shadow-lg text-center">
+
+                <div class="mb-5">
+                    <h1 class="heading-1" style="font-size: 2.5rem;">Нов профил</h1>
+                    <h2 class="heading-2" style="font-size: 1.1rem;">Присъединете се към PremiumCarRentX</h2>
+                    <p class="text-white-50 small">Създайте своя профил, за да започнете вашето премиум пътуване.</p>
+                </div>
+
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3" role="alert"></div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Input.Email" class="form-control form-control-dark" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="text-white-50">Вашият Имейл адрес</label>
+                        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-4">
+                                <input asp-for="Input.Password" type="password" class="form-control form-control-dark" autocomplete="new-password" aria-required="true" placeholder="password" />
+                                <label asp-for="Input.Password" class="text-white-50">Парола</label>
+                                <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating mb-4">
+                                <input asp-for="Input.ConfirmPassword" type="password" class="form-control form-control-dark" autocomplete="new-password" aria-required="true" placeholder="password" />
+                                <label asp-for="Input.ConfirmPassword" class="text-white-50">Потвърди парола</label>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="registerSubmit" type="submit" class="btn-search-car w-100 py-3 mt-3 shadow-lg">
+                        РЕГИСТРИРАЙ МЕ
+                    </button>
+
+                    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+                        <p class="small text-white-50 mb-0">
+                            Вече имате профил?
+                            <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-turquoise text-decoration-none fw-bold">Влезте оттук</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

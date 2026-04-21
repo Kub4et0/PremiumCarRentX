@@ -1,0 +1,67 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<Rent_a_car.Models.Rental>
+
+@{
+    ViewData["Title"] = "Админ панел";
+}
+
+<h1 class="mb-4">Админ панел</h1>
+
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <h5>Автомобили</h5>
+                <p class="fs-4">@ViewBag.TotalCars</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <h5>Свободни автомобили</h5>
+                <p class="fs-4">@ViewBag.AvailableCars</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <h5>Шофьори</h5>
+                <p class="fs-4">@ViewBag.TotalDrivers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-dark">
+            <div class="card-body">
+                <h5>Приходи</h5>
+                <p class="fs-4">@ViewBag.TotalRevenue лв.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Последни наеми</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Автомобил</th>
+            <th>Период</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var rental in Model)
+    {
+        <tr>
+            <td>@rental.User?.FullName</td>
+            <td>@rental.Car?.Brand @rental.Car?.Model</td>
+            <td>@rental.StartDate.ToShortDateString() - @rental.EndDate.ToShortDateString()</td>
+            <td>@rental.Status</td>
+        </tr>
+    }
+    </tbody>
+</table>

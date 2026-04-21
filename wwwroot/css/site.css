@@ -1,0 +1,384 @@
+/* --- ДЕФИНИЦИЯ НА ПРОМЕНЛИВИ --- */
+:root {
+    --bg-dark: #0f172a;
+    --navbar-bg: rgba(15, 23, 42, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --accent-turquoise: #2dd4bf;
+    --accent-glow: rgba(45, 212, 191, 0.4);
+    --text-main: #f1f5f9;
+    --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- НАВИГАЦИЯ (ПО-МАЛКА И ЕЛЕГАНТНА) --- */
+.navbar {
+    background: var(--navbar-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45, 212, 191, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--accent-turquoise) !important;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--accent-turquoise) !important;
+    }
+
+/* --- HERO СЕКЦИЯ --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(45, 212, 191, 0.2) 100%), url('../Images/mercedes.jpg') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed;
+    margin-top: -60px;
+    padding: 160px 0 80px 0;
+}
+
+.heading-1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 0.5rem;
+}
+
+.heading-2 {
+    font-size: clamp(1.2rem, 5vw, 2.8rem);
+    font-weight: 300;
+    color: var(--accent-turquoise);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
+}
+
+.sub-heading {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+    line-height: 1.6;
+}
+
+/* --- ПРОФЕСИОНАЛЕН БУТОН --- */
+.btn-premium-glow {
+    background: linear-gradient(90deg, #0d9488 0%, #2dd4bf 100%);
+    color: #0f172a !important;
+    font-weight: 700;
+    padding: 14px 38px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 10px 25px var(--accent-glow);
+    transition: all 0.4s ease;
+    display: inline-block;
+}
+
+    .btn-premium-glow:hover {
+        transform: translateY(-5px);
+        background: #ffffff !important;
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+    }
+
+/* --- КАРТИ (GLASSMORPHISM) --- */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .glass-card:hover {
+        transform: translateY(-12px);
+        border-color: var(--accent-turquoise);
+        background: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+.loyalty-highlight {
+    border-color: rgba(45, 212, 191, 0.3);
+    box-shadow: 0 0 15px rgba(45, 212, 191, 0.1);
+}
+
+.icon-turquoise {
+    color: var(--accent-turquoise);
+    font-size: 3rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 12px var(--accent-glow));
+}
+
+/* --- СЕКЦИЯ ТЪРСЕНЕ НА АВТОМОБИЛИ (НОВО) --- */
+
+/* Стилизиране на бутона ТЪРСИ */
+.btn-search-car {
+    background: linear-gradient(90deg, #0d9488 0%, #2dd4bf 100%) !important;
+    color: #0f172a !important; /* Тъмен текст за контраст */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 212, 191, 0.3);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+    .btn-search-car:hover {
+        transform: translateY(-2px);
+        background: #ffffff !important;
+        box-shadow: 0 8px 25px rgba(45, 212, 191, 0.5);
+        color: #0f172a !important;
+    }
+
+/* Бутон за ресет (иконата със стрелката) */
+.btn-reset-search {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--accent-turquoise) !important;
+    border-radius: 8px;
+    padding: 12px;
+    transition: 0.3s;
+}
+
+    .btn-reset-search:hover {
+        background: rgba(45, 212, 191, 0.1) !important;
+        border-color: var(--accent-turquoise) !important;
+    }
+
+/* Стилизиране на самите Input и Select полета */
+.form-select, .form-control {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 8px !important;
+}
+
+    /* Цвят на опциите в падащото меню (за някои браузъри) */
+    .form-select option {
+        background-color: var(--bg-dark);
+        color: white;
+    }
+
+    .form-select:focus, .form-control:focus {
+        border-color: var(--accent-turquoise) !important;
+        box-shadow: 0 0 0 0.25rem rgba(45, 212, 191, 0.2) !important;
+    }
+
+/* --- ФУТЪР --- */
+footer {
+    background-color: #0a0f1d;
+    padding: 25px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: auto;
+}
+/* --- СТИЛИЗИРАНЕ НА БУТОНА ТЮРКОАЗ (РЕЗЕРВИРАЙ) --- */
+.btn-turquoise {
+    background-color: var(--accent-turquoise) !important;
+    color: var(--bg-dark) !important; /* Тъмен текст върху светъл фон */
+    font-weight: 700 !important;
+    border: none !important;
+    padding: 8px 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 15px var(--accent-glow);
+    text-transform: none;
+}
+
+    .btn-turquoise:hover {
+        background-color: #ffffff !important; /* Става бял при посочване */
+        color: var(--bg-dark) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(45, 212, 191, 0.6);
+    }
+
+/* Оптимизация на бутона Детайли */
+.btn-outline-light {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+    .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border-color: #ffffff !important;
+    }
+/* Сияние около снимките на шофьорите */
+.border-turquoise {
+    border-color: var(--accent-turquoise) !important;
+    filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover .border-turquoise {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(45, 212, 191, 0.5));
+}
+
+/* Анимация за плавно появяване на картите */
+.glass-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Кръгове за иконите в Контакти */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: rgba(45, 212, 191, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+}
+
+/* Социални мрежи */
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .social-icon:hover {
+        background: var(--accent-turquoise);
+        color: var(--bg-dark);
+        border-color: var(--accent-turquoise);
+        transform: translateY(-3px);
+    }
+/* --- СТИЛИЗИРАНЕ НА БУТОНА ЗА ИЗХОД --- */
+.btn-logout {
+    color: rgba(255, 255, 255, 0.8) !important; /* Светло бял текст */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Тънък светъл борд */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+    .btn-logout:hover {
+        background: rgba(255, 77, 77, 0.1); /* Нежно червено сияние при ховър */
+        border-color: #ff4d4d; /* Червен борд */
+        color: #ff4d4d !important; /* Червен текст */
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(255, 77, 77, 0.2);
+    }
+
+    /* Оправяме иконата в бутона */
+    .btn-logout i {
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-logout:hover i {
+        transform: translateX(3px); /* Леко движение на иконата */
+    }
+/* Корекция за Floating Labels в тъмен режим */
+.form-floating > .form-control-dark {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+
+.form-floating > label {
+    padding-left: 1rem;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.form-floating > .form-control-dark:focus ~ label,
+.form-floating > .form-control-dark:not(:placeholder-shown) ~ label {
+    color: var(--accent-turquoise) !important;
+    opacity: 0.8;
+}
+
+/* Оправяне на чекбокса "Запомни ме" */
+.form-check-input:checked {
+    background-color: var(--accent-turquoise) !important;
+    border-color: var(--accent-turquoise) !important;
+}

@@ -1,0 +1,73 @@
+﻿@model Driver
+@{
+    ViewData["Title"] = "Добавяне на шофьор";
+}
+
+<div class="container" style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="glass-card p-4 p-md-5 shadow-lg animate__animated animate__fadeIn">
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3">
+                        <i class="bi bi-person-plus-fill icon-turquoise"></i>
+                    </div>
+                    <h2 class="text-white mb-0">Добавяне на нов шофьор</h2>
+                </div>
+
+                <hr class="border-light opacity-10 mb-4">
+
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label asp-for="FullName" class="form-label small fw-bold text-white-50">Име и Фамилия</label>
+                            <input asp-for="FullName" class="form-control form-control-dark" placeholder="Име и Фамилия">
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label small fw-bold text-white-50">Телефон</label>
+                            <input asp-for="PhoneNumber" class="form-control form-control-dark" placeholder="0888 123 456">
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="ExperienceYears" class="form-label small fw-bold text-white-50">Стаж (години)</label>
+                            <input asp-for="ExperienceYears" type="number" class="form-control form-control-dark" placeholder="5">
+                            <span asp-validation-for="ExperienceYears" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="ImageUrl" class="form-label small fw-bold text-white-50">Снимка (URL)</label>
+                            <input asp-for="ImageUrl" class="form-control form-control-dark" placeholder="https://...">
+                            <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-white-50">Информация за шофьора</label>
+                            <textarea class="form-control form-control-dark" rows="3" placeholder="Кратка информация за шофьора..."></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check form-switch mt-2">
+                                <input asp-for="IsAvailable" class="form-check-input custom-switch" type="checkbox" id="flexSwitchCheckDefault" checked>
+                                <label class="form-check-label text-white-50 ms-2" for="flexSwitchCheckDefault">Наличен за работа</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex gap-3 mt-4">
+                            <button type="submit" class="btn-search-car px-5 py-2">
+                                <i class="bi bi-save me-2"></i> ЗАПАЗИ
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-light px-5 py-2 rounded-pill shadow-sm">
+                                ОТКАЗ
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model Rent_a_car.Models.Car
+
+@{
+    ViewData["Title"] = "Детайли - " + Model.Brand + " " + Model.Model;
+}
+
+<div class="container" style="padding-top: 130px; padding-bottom: 60px;">
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-outline-light rounded-pill px-4">
+            <i class="bi bi-arrow-left me-2"></i>Назад към списъка
+        </a>
+    </div>
+
+    <div class="glass-card overflow-hidden border-0 shadow-lg">
+        <div class="row g-0">
+            <div class="col-lg-7">
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/no-car.jpg" : Model.ImageUrl)"
+                     class="img-fluid w-100 h-100"
+                     style="object-fit: cover; min-height: 400px;"
+                     alt="@Model.Brand" />
+            </div>
+
+            <div class="col-lg-5 p-5 d-flex flex-column justify-content-center">
+                <h1 class="heading-1 mb-2" style="font-size: 2.5rem;">@Model.Brand @Model.Model</h1>
+                <h4 class="text-turquoise fw-light mb-4">Премиум Избор</h4>
+
+                <hr class="border-secondary opacity-25 mb-4" />
+
+                <div class="info-grid mb-5">
+                    <div class="d-flex justify-content-between py-2 border-bottom border-secondary border-opacity-10">
+                        <span class="text-white-50">Година:</span>
+                        <span class="text-white fw-bold">@Model.Year г.</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-bottom border-secondary border-opacity-10">
+                        <span class="text-white-50">Клас:</span>
+                        <span class="badge bg-turquoise rounded-pill px-3">@Model.Class</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-bottom border-secondary border-opacity-10">
+                        <span class="text-white-50">Скоростна кутия:</span>
+                        <span class="text-white">@(Model.Transmission == "Automatic" ? "Автоматична" : "Ръчна")</span>
+                    </div>
+                    <div class="d-flex justify-content-between py-2 border-bottom border-secondary border-opacity-10">
+                        <span class="text-white-50">Наличност:</span>
+                        @if (Model.IsAvailable)
+                        {
+                            <span class="text-success fw-bold"><i class="bi bi-check-circle me-1"></i>Наличен</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bold"><i class="bi bi-x-circle me-1"></i>Зает</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <span class="text-white-50 d-block mb-1">Цена за наем:</span>
+                    <h2 class="text-turquoise fw-bold m-0">@Model.PricePerDay лв. <small class="text-white-50 fs-5">/ ден</small></h2>
+                </div>
+
+                <div class="d-grid gap-3">
+                    @if (User.Identity.IsAuthenticated && Model.IsAvailable && !User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Rentals" asp-action="Create" asp-route-carId="@Model.Id"
+                           class="btn-premium-glow text-center py-3">
+                            <i class="bi bi-calendar-check me-2"></i>РЕЗЕРВИРАЙ СЕГА
+                        </a>
+                    }
+                    else if (!Model.IsAvailable)
+                    {
+                        <button class="btn btn-secondary py-3 rounded-pill" disabled>В МОМЕНТА Е ЗАЕТ</button>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="d-flex gap-2">
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning flex-fill rounded-pill">Редактирай</a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger flex-fill rounded-pill">Изтрий</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

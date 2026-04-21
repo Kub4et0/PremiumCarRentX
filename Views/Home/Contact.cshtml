@@ -1,0 +1,99 @@
+﻿@model ContactMessage
+@{
+    ViewData["Title"] = "Контакти";
+}
+
+<div class="container" style="padding-top: 150px; padding-bottom: 80px;">
+
+    <div class="text-center mb-5">
+        <h1 class="heading-1">Свържете се с нас</h1>
+        <p class="text-white-50 fs-5">Имате въпроси? Ние сме тук, за да помогнем денонощно.</p>
+    </div>
+
+    @* --- ТУК Е КОДЪТ ЗА СЪОБЩЕНИЕТО ЗА УСПЕХ --- *@
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-11">
+                <div class="alert alert-success border-0 shadow-lg animate__animated animate__fadeInDown"
+                     style="background: rgba(0, 255, 170, 0.15); color: #00ffaa; backdrop-filter: blur(10px); border-radius: 15px; text-align: center;">
+                    <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-lg-4">
+            <div class="glass-card p-4 h-100">
+                @* ... твоите статични данни за адрес и телефон остават същите ... *@
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3">
+                        <i class="bi bi-geo-alt icon-turquoise"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-white mb-1">Адрес</h5>
+                        <p class="text-white-50 small mb-0">гр. София, бул. "Витоша" 100</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-circle me-3">
+                        <i class="bi bi-telephone icon-turquoise"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-white mb-1">Телефон</h5>
+                        <p class="text-white-50 small mb-0">+359 888 123 456</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center mb-5">
+                    <div class="icon-circle me-3">
+                        <i class="bi bi-envelope icon-turquoise"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-white mb-1">Имейл</h5>
+                        <p class="text-white-50 small mb-0">office@premiumcar-rentx.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="glass-card p-4 p-md-5">
+                @* --- ДОБАВЕН МЕТОД И ЕКШЪН --- *@
+                <form asp-action="Contact" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="form-label small fw-bold text-white-50">Вашето име</label>
+                            <input asp-for="Name" class="form-control form-control-dark" placeholder="Иван Иванов">
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label small fw-bold text-white-50">Имейл адрес</label>
+                            <input asp-for="Email" class="form-control form-control-dark" placeholder="ivan@example.com">
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Subject" 5class="form-label small fw-bold text-white-50">Тема</label>
+                            <input asp-for="Subject" class="form-control form-control-dark" placeholder="Въпрос относно наем">
+                            <span asp-validation-for="Subject" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Message" class="form-label small fw-bold text-white-50">Съобщение</label>
+                            <textarea asp-for="Message" class="form-control form-control-dark" rows="5" placeholder="Напишете вашето съобщение тук..."></textarea>
+                            <span asp-validation-for="Message" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn-search-car w-100 py-3">
+                                <i class="bi bi-send-fill me-2"></i> ИЗПРАТИ СЪОБЩЕНИЕТО
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

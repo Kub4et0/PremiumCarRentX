@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Rent a Car Premium</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4 py-3 sticky-top">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-shield-shaded me-2"></i>PremiumCar<span style="color:white;">RentX</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link px-3" asp-controller="Home" asp-action="Index">Начало</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" asp-controller="Cars" asp-action="Index">Автомобили</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" asp-controller="Drivers" asp-action="Index">Шофьори</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" asp-controller="Home" asp-action="Contact">Контакти</a>
+                        </li>
+                         
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Client"))
+                            {
+                                <li class="nav-item border-start border-secondary ms-2 ps-2">
+                                    <a class="nav-link text-turquoise fw-bold" asp-controller="Rentals" asp-action="MyRentals">
+                                        <i class="bi bi-calendar-check me-1"></i>Моите резервации
+                                    </a>
+                                </li>
+                            }
+
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown border-start border-secondary ms-2 ps-2">
+                                    <a class="nav-link dropdown-toggle text-turquoise fw-bold" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-gear-fill me-1"></i>Администрация
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-secondary" aria-labelledby="adminDropdown">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Rentals" asp-action="ManageRentals">
+                                                <i class="bi bi-list-check me-2"></i>Управление на заявки
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Admin" asp-action="Contacts">
+                                                <i class="bi bi-envelope-paper me-2"></i>Входящи съобщения
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider border-secondary"></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Cars" asp-action="Create">
+                                                <i class="bi bi-plus-circle me-2"></i>Добави автомобил
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="mt-auto py-4 text-center border-top border-secondary">
+        <div class="container text-white-50">
+            &copy; 2026 - <span class="text-white fw-bold">Rent a Car Premium Edition</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

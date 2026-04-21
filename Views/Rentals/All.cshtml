@@ -1,0 +1,51 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<Rent_a_car.Models.Rental>
+
+@{
+    ViewData["Title"] = "Всички наеми";
+}
+
+<h1>Всички наеми</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Клиент</th>
+            <th>Автомобил</th>
+            <th>Шофьор</th>
+            <th>Период</th>
+            <th>Цена</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var rental in Model)
+    {
+        <tr>
+            <td>@rental.Id</td>
+            <td>@rental.User?.FullName</td>
+            <td>@rental.Car?.Brand @rental.Car?.Model</td>
+            <td>@(rental.Driver?.FullName ?? "Няма")</td>
+            <td>@rental.StartDate.ToShortDateString() - @rental.EndDate.ToShortDateString()</td>
+            <td>@rental.TotalPrice лв.</td>
+            <td>@rental.Status</td>
+            <td class="d-flex gap-2">
+                <a asp-action="EditStatus" asp-route-id="@rental.Id" class="btn btn-sm btn-warning">Статус</a>
+                <a asp-action="AssignDriver" asp-route-id="@rental.Id" class="btn btn-sm btn-info">Шофьор</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

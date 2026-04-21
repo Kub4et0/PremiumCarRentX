@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Rent_a_car.Models.Rental>
+
+@{
+    ViewData["Title"] = "Моите курсове";
+}
+
+<h1>Моите възложени курсове</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Нямате възложени курсове.</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Клиент</th>
+                <th>Автомобил</th>
+                <th>Период</th>
+                <th>Статус</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model)
+            {
+                <tr>
+                    <td>@rental.User?.FullName</td>
+                    <td>@rental.Car?.Brand @rental.Car?.Model</td>
+                    <td>@rental.StartDate.ToShortDateString() - @rental.EndDate.ToShortDateString()</td>
+                    <td>@rental.Status</td>
+                    <td>
+                        <a asp-controller="Rentals" asp-action="EditStatus" asp-route-id="@rental.Id" class="btn btn-warning btn-sm">
+                            Смени статус
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

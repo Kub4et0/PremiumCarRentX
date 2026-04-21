@@ -1,0 +1,74 @@
+﻿@model Rent_a_car.Models.Driver
+
+@{
+    ViewData["Title"] = "Редакция на шофьор";
+}
+
+<div class="container" style="padding-top: 150px; padding-bottom: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="text-center mb-5">
+                <h1 class="heading-1" style="font-size: 2.5rem;">Редактиране</h1>
+                <h2 class="heading-2" style="font-size: 1.2rem;">Шофьор: @Model.FullName</h2>
+            </div>
+
+            <div class="glass-card p-5 shadow-lg">
+                <form asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-4"></div>
+
+                    <div class="row g-4">
+                        <div class="col-md-12">
+                            <label asp-for="FullName" class="form-label small fw-bold text-white-50">Пълно име</label>
+                            <input asp-for="FullName" class="form-control form-control-dark" />
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label small fw-bold text-white-50">Телефон</label>
+                            <input asp-for="PhoneNumber" class="form-control form-control-dark" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="ExperienceYears" class="form-label small fw-bold text-white-50">Години опит</label>
+                            <input asp-for="ExperienceYears" class="form-control form-control-dark" />
+                            <span asp-validation-for="ExperienceYears" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="ImageUrl" class="form-label small fw-bold text-white-50">URL на снимка (Линк)</label>
+                            <input asp-for="ImageUrl" class="form-control form-control-dark" placeholder="https://..." />
+                            <span asp-validation-for="ImageUrl" class="text-danger small"></span>
+                            <div class="form-text text-white-50 small mt-2">Ако оставите това поле празно, снимката ще бъде премахната.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check form-switch p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
+                                <input class="form-check-input ms-0 me-3" asp-for="IsAvailable" style="cursor: pointer;">
+                                <label class="form-check-label text-white" asp-for="IsAvailable">На разположение</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-grid gap-3 pt-3">
+                            <button type="submit" class="btn-search-car py-3">
+                                <i class="bi bi-save me-2"></i> ЗАПАЗИ ПРОМЕНИТЕ
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-light rounded-pill py-2">
+                                <i class="bi bi-arrow-left me-2"></i>Назад
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

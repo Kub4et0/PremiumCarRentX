@@ -1,0 +1,125 @@
+﻿@model Rent_a_car.ViewModels.RentalCreateViewModel
+
+@{
+    ViewData["Title"] = "Резервация";
+}
+
+<div class="container" style="padding-top: 130px; padding-bottom: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="text-center mb-5">
+                <h1 class="heading-1" style="font-size: 2.5rem;">Резервация</h1>
+                <h2 class="heading-2" style="font-size: 1.5rem;">@Model.CarName</h2>
+                <p class="text-white-50">Изберете периода на наемане и допълнителни услуги.</p>
+            </div>
+
+            <div class="glass-card p-4 p-md-5">
+                <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                <form asp-action="Create" method="post" id="rentalForm">
+                    <input type="hidden" asp-for="CarId" />
+                    <input type="hidden" asp-for="CarName" />
+                    <input type="hidden" id="dailyPrice" value="@Model.PricePerDay.ToString("0.00").Replace(',', '.')" />
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label asp-for="StartDate" class="form-label small fw-bold text-white-50">Начална дата</label>
+                            <input asp-for="StartDate" type="date" class="form-control form-control-dark" id="startDate" />
+                            <span asp-validation-for="StartDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EndDate" class="form-label small fw-bold text-white-50">Крайна дата</label>
+                            <input asp-for="EndDate" type="date" class="form-control form-control-dark" id="endDate" />
+                            <span asp-validation-for="EndDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-check form-switch p-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
+                                <input asp-for="WithDriver" class="form-check-input ms-0 me-3" type="checkbox" id="withDriver" style="cursor: pointer;">
+                                <label class="form-check-label text-white fw-bold" for="withDriver" style="cursor: pointer;">
+                                    Искам личен шофьор <span class="text-turquoise">(+50 лв./ден)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="driverList" style="display: @(Model.WithDriver ? "block" : "none");" class="col-12 animate-fade-in">
+                            <label asp-for="DriverId" class="form-label small fw-bold text-turquoise">Изберете наличен шофьор</label>
+                            <select asp-for="DriverId" asp-items="Model.Drivers" class="form-select form-select-dark">
+                                <option value="">-- Изберете шофьор --</option>
+                            </select>
+                            <span asp-validation-for="DriverId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-4 rounded-3 d-flex justify-content-between align-items-center"
+                                 style="background: linear-gradient(90deg, rgba(45, 212, 191, 0.1) 0%, rgba(15, 23, 42, 0.2) 100%); border: 1px solid rgba(45, 212, 191, 0.2);">
+                                <h5 class="m-0 text-white fw-light">Обща сума:</h5>
+                                <h3 class="m-0 text-turquoise fw-bold"><span id="totalDisplay">0.00</span> лв.</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-grid gap-3 pt-3">
+                            <button type="submit" class="btn-search-car py-3">
+                                <i class="bi bi-check-circle-fill me-2"></i>Потвърди резервацията
+                            </button>
+                            <a asp-controller="Cars" asp-action="Details" asp-route-id="@Model.CarId" class="btn btn-outline-light rounded-pill py-2">
+                                Назад към детайлите
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const startDateInput = document.getElementById("startDate");
+            const endDateInput = document.getElementById("endDate");
+            const withDriverCheckbox = document.getElementById("withDriver");
+            const driverList = document.getElementById("driverList");
+            const totalDisplay = document.getElementById("totalDisplay");
+            const dailyPrice = parseFloat(document.getElementById("dailyPrice").value);
+
+            function calculatePrice() {
+                const start = new Date(startDateInput.value);
+                const end = new Date(endDateInput.value);
+                const withDriver = withDriverCheckbox.checked;
+
+                if (startDateInput.value && endDateInput.value && end > start) {
+                    const diffTime = Math.abs(end - start);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                    const driverFee = withDriver ? 50 : 0;
+                    const total = diffDays * (dailyPrice + driverFee);
+
+                    totalDisplay.innerText = total.toFixed(2);
+                } else {
+                    totalDisplay.innerText = "0.00";
+                }
+            }
+
+            function toggleDriver() {
+                if (withDriverCheckbox.checked) {
+                    driverList.style.display = "block";
+                } else {
+                    driverList.style.display = "none";
+                }
+                calculatePrice();
+            }
+
+            startDateInput.addEventListener("change", calculatePrice);
+            endDateInput.addEventListener("change", calculatePrice);
+            withDriverCheckbox.addEventListener("change", toggleDriver);
+
+            // Първоначално изчисляване
+            calculatePrice();
+        });
+    </script>
+}

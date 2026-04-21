@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Rent_a_car.Models.Driver>
+
+@{
+    ViewData["Title"] = "Професионални Шофьори";
+}
+
+<div class="container" style="padding-top: 130px; padding-bottom: 60px;">
+
+    <div class="text-center mb-5">
+        <h1 class="heading-1">Нашите Шофьори</h1>
+        <h2 class="heading-2" style="font-size: 1.5rem;">Професионализъм и Сигурност</h2>
+        <p class="sub-heading">Екип от експерти, готови да направят вашето пътуване незабравимо.</p>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="mt-4">
+                <a asp-action="Create" class="btn-premium-glow">
+                    <i class="bi bi-person-plus-fill me-2"></i>Добави нов шофьор
+                </a>
+            </div>
+        }
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        @foreach (var driver in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="glass-card h-100 p-4 text-center d-flex flex-column">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="d-flex justify-content-end gap-2 mb-2">
+                            <a asp-action="Edit" asp-route-id="@driver.Id" class="text-warning opacity-75 hover-opacity-100" title="Редактирай">
+                                <i class="bi bi-pencil-square fs-5"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@driver.Id" class="text-danger opacity-75 hover-opacity-100" title="Изтрий">
+                                <i class="bi bi-trash fs-5"></i>
+                            </a>
+                        </div>
+                    }
+
+                    <div class="mb-4">
+                        <img src="@(string.IsNullOrEmpty(driver.ImageUrl) ? "/images/no-avatar.jpg" : driver.ImageUrl)"
+                             class="rounded-circle border-turquoise shadow-lg"
+                             style="width: 140px; height: 140px; object-fit: cover;"
+                             alt="@driver.FullName">
+                    </div>
+
+                    <div class="flex-grow-1">
+                        <h4 class="text-white fw-bold mb-2">@driver.FullName</h4>
+
+                        <div class="mb-3">
+                            <span class="badge bg-turquoise rounded-pill px-3 py-2">
+                                @driver.ExperienceYears години опит
+                            </span>
+                        </div>
+
+                        <p class="card-text text-white-50 small mb-4" style="line-height: 1.5;">
+                            @(driver.Biography ?? "Няма предоставена допълнителна информация.")
+                        </p>
+
+                        <div class="mb-4">
+                            @if (driver.IsAvailable)
+                            {
+                                <span class="text-success fw-bold small">
+                                    <i class="bi bi-check-circle-fill me-1" style="filter: drop-shadow(0 0 5px #198754);"></i>
+                                    На разположение
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-danger fw-bold small">
+                                    <i class="bi bi-x-circle-fill me-1"></i>
+                                    В момента е зает
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-3">
+                        <a asp-controller="Cars" asp-action="Index" class="btn btn-outline-light rounded-pill px-4 w-100 py-2 border-opacity-25 hover-bg-turquoise">
+                            <i class="bi bi-calendar-check me-2"></i>Избери
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
